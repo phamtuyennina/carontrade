@@ -1,0 +1,13 @@
+<link href="css/reset.css" type="text/css" rel="stylesheet" />
+<link href="css/css.css" type="text/css" rel="stylesheet" />
+<link href="css/default.css" type="text/css" rel="stylesheet" />
+<link href="css/slick.css" type="text/css" rel="stylesheet" />
+<link href="css/slick-theme.css" type="text/css" rel="stylesheet" />
+<link href="font-awesome-4.6.0/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+<link href="bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<link href="css/animate.css" type="text/css" rel="stylesheet" />
+<link href="css/jquery.circliful.css" type="text/css" rel="stylesheet" />
+<link href="css/HoldOn.css" type="text/css" rel="stylesheet" />
+<link href="style.css" type="text/css" rel="stylesheet" />
+<link href="css/select2.min.css" type="text/css" rel="stylesheet" />
+<link href="css/photobox.css" type="text/css" rel="stylesheet" />

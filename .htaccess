@@ -1,0 +1,48 @@
+RewriteEngine on
+Options -Indexes
+
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+RewriteRule ^sitemap.xml$ sitemap.php [L]
+DirectoryIndex  index.php
+
+ErrorDocument 400     /400.php
+ErrorDocument 401     /401.php
+ErrorDocument 403     /403.php
+ErrorDocument 404     /404.php
+ErrorDocument 500     /500.php
+
+RewriteRule ^thumb/([0-9]+)x([0-9]+)x([0-9]+)x([0-9]+)/(.*)$ timthumb.php?w=$1&h=$2&zc=$3&q=$4&src=http://%{HTTP_HOST}/carontrade/$5  [L]
+
+RewriteRule ^admin$ admin/index.php [L]
+RewriteRule ^admin/$ admin/index.php [L]
+
+RewriteRule ^ajax/([a-zA-Z0-9_-]+).html$ index.php?com=ajax&act=$1 [L]
+RewriteRule ^dang-tin/([a-zA-Z0-9_-]+)$ index.php?com=dang-tin&step=$1 [L]
+RewriteRule ^sua-tin/([a-zA-Z0-9_-]+)$ index.php?com=sua-tin&step=$1 [L]
+RewriteRule ^thanh-vien/([a-zA-Z0-9_-]+)$ index.php?com=thanh-vien&step=$1 [L]
+RewriteRule ^thanh-vien/([a-zA-Z0-9_-]+)&p=([0-9]+)$ index.php?com=thanh-vien&step=$1&p=$2 [L]
+
+RewriteRule ^tim-xe&q=(.*)$ index.php?com=tim-xe&q=$1  [L]
+RewriteRule ^tim-xe&q=(.*)&p=([0-9]+)$ index.php?com=tim-xe&q=$1&p=$2  [L]
+
+RewriteRule ^([a-zA-Z0-9_-]+).html$ index.php?com=$1  [L]
+RewriteRule ^([a-zA-Z0-9_-]+).html&p=([0-9]+)$ index.php?com=$1&p=$2  [L]
+RewriteRule ^([a-zA-Z0-9_-]+).html&sort=([0-9]+)$ index.php?com=$1&sort=$2 [L]
+RewriteRule ^([a-zA-Z0-9_-]+).html&sort=([0-9]+)&p=([0-9]+)$ index.php?com=$1&sort=$2&p=$3 [L]
+
+
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+).html$ index.php?com=$1&id=$2  [L]
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+).html&p=([0-9]+)$ index.php?com=$1&id=$2&p=$3  [L]
+
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)$ index.php?com=$1&id_danhmuc=$2  [L]
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)&p=([0-9]+)$ index.php?com=$1&id_danhmuc=$2&p=$3  [L]
+
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)&sort=([0-9]+)$ index.php?com=$1&id_danhmuc=$2&sort=$3  [L]
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)&sort=([0-9]+)&p=([0-9]+)$ index.php?com=$1&id_danhmuc=$2&sort=$3&p=$4  [L]
+
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([0-9]+)$ index.php?com=$1&id=$3  [L]
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([0-9]+)&p=([0-9]+)$ index.php?com=$1&id=$3&p=$4[L]
+
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/$ index.php?com=$1&id_list=$2  [L]
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/&p=([0-9]+)$ index.php?com=$1&id_list=$2&p=$3  [L]
