@@ -41,33 +41,22 @@
             </div>
             <div class="clear"></div>
         </div> 
-        <?php if($_GET['type']=='goitin'){ ?>
-        <div class="formRow">
-            <div class="bx_sl1">
-                <label>Số Ngày</label>
-                <div class="formRight">
-                <input type="text" value="<?=@$item['ngay']?>" name="ngay" title="Số ngày của gói tin" class="tipS" />
-                </div>
-                <div class="clear"></div>
+        <div class="formRow <?php if($_GET['type']!='mucdotieuthu'){echo 'none';} ?>">
+            <label>Mức độ tiêu thụ</label>
+            <div class="formRight">
+                <input type="text" name="mucdotieuthu" title="Nhập mức độ tiêu thụ L/100Km" id="gia" class="tipS conso" value="<?=@$item['mucdotieuthu']?>" />
             </div>
-            <div class="bx_sl1">
-                <label>Số Giờ</label>
-                <div class="formRight">
-                <input type="text" value="<?=@$item['gio']?>" name="gio" title="Số giờ của gói tin" class="tipS" />
-                </div>
-                <div class="clear"></div>
+            <div class="clear"></div>
+        </div>  
+        <div class="formRow <?php if($_GET['type']!='tin-thuong' && $_GET['type']!='tin-tiet-kiem' && $_GET['type']!='tin-linh-dong' && $_GET['type']!='tin-supper' && $_GET['type']!='tin-khuyen-mai'){echo 'none';} ?>">
+            <label>Thời gian</label>
+            <div class="formRight">
+                <input type="text" name="thoigian" title="Nhập thời gian" id="gia" class="tipS conso" value="<?=@$item['thoigian']?>" />
             </div>
-            <div class="bx_sl1">
-                <label>Gía tiền</label>
-                <div class="formRight">
-                <input type="text" value="<?=@$item['giagoi']?>" name="giagoi" title="Giá của gói tin" class="tipS conso" />
-                </div>
-                <div class="clear"></div>
-            </div>
-           <div class="clear"></div>
-        </div>
-        <?php }?>
-        <div class="formRow <?php if($_GET['type']!='giaxe'){echo 'none';} ?>">
+            <div class="clear"></div>
+        </div>  
+        
+        <div class="formRow <?php if($_GET['type']!='giaxe' && $_GET['type']!='tin-thuong' && $_GET['type']!='tin-tiet-kiem' && $_GET['type']!='tin-linh-dong' && $_GET['type']!='tin-supper' && $_GET['type']!='tin-khuyen-mai'){echo 'none';} ?>">
             <label>Giá</label>
             <div class="formRight">
                 <input type="text" name="gia" title="Nhập giá" id="gia" class="tipS conso" value="<?=@$item['gia']?>" />

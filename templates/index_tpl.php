@@ -10,12 +10,12 @@
 	$loaixe=$d->result_array();	
 	
 	$d->reset();
-	$sql = "select ten$lang as ten,link,photo from #_slider where hienthi=1 and type='slider1' order by stt,id desc";
+	$sql = "select ten$lang as ten,link,photo,id from #_slider where hienthi=1 and type='slider1' order by stt,id desc";
 	$d->query($sql);
 	$quangcao1=$d->result_array();	
 	
 	$d->reset();
-	$sql = "select ten$lang as ten,link,photo from #_slider where hienthi=1 and type='slider2' order by stt,id desc";
+	$sql = "select ten$lang as ten,link,photo,id from #_slider where hienthi=1 and type='slider2' order by stt,id desc";
 	$d->query($sql);
 	$quangcao2=$d->result_array();		
 	
@@ -40,7 +40,7 @@
 	$video = $d->result_array();	
 	
 	$d->reset();
-	$sql = "select ten$lang as ten,link,photo from #_slider where hienthi=1 and type='slider3' order by stt,id desc";
+	$sql = "select ten$lang as ten,link,photo,id from #_slider where hienthi=1 and type='slider3' order by stt,id desc";
 	$d->query($sql);
 	$quangcao3=$d->result_array();	
 	
@@ -98,7 +98,7 @@
             	<div class="sl_quangcao1">
                 	<?php foreach($quangcao1 as $v){ ?>
                     <div>
-                    	<p><a href="<?=$v['link']?>"><img src="thumb/380x332x1x90/<?=_upload_hinhanh_l.$v['photo']?>" alt="<?=$v['ten']?>" /></a></p>
+                    	<p><a class="dem_click_banner" data-id="<?=$v['id']?>" href="<?=$v['link']?>"><img src="thumb/380x332x1x90/<?=_upload_hinhanh_l.$v['photo']?>" alt="<?=$v['ten']?>" /></a></p>
                     </div>
                     
                     <?php }?>
@@ -112,7 +112,7 @@
     <div class="sl_quangcao1">
         <?php foreach($quangcao2 as $v){ ?>
         <div>
-            <p><a href="<?=$v['link']?>"><img src="thumb/1366x300x1x90/<?=_upload_hinhanh_l.$v['photo']?>" alt="<?=$v['ten']?>" /></a></p>
+            <p><a class="dem_click_banner" data-id="<?=$v['id']?>" href="<?=$v['link']?>"><img src="thumb/1366x300x1x90/<?=_upload_hinhanh_l.$v['photo']?>" alt="<?=$v['ten']?>" /></a></p>
         </div>
         
         <?php }?>
@@ -226,7 +226,7 @@
         	<?php foreach($quangcao3 as $v){ ?>
             <div>
             	<div class="pad_sl3">
-                	<p><a href="<?=$v['link']?>"><img src="thumb/357x120x1x90/<?=_upload_hinhanh_l.$v['photo']?>" alt="<?=$v['ten']?>" /></a></p>
+                	<p><a class="dem_click_banner" data-id="<?=$v['id']?>" href="<?=$v['link']?>"><img src="thumb/357x120x1x90/<?=_upload_hinhanh_l.$v['photo']?>" alt="<?=$v['ten']?>" /></a></p>
                 </div>
             </div>
             <?php }?>

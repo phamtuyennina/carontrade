@@ -109,7 +109,7 @@
             <?php }else{?>
             <p><a href="thanh-vien/tin-dang-ban"><?=($_SESSION['user_w']['loaithanhvien']=='Đại lý')?$_SESSION['user_w']['congty']:$_SESSION['user_w']['hoten']?> <i class="fa fa-angle-down" aria-hidden="true"></i></a>
             </p>
-            <div class="menu-panel clearfix">
+            <div class="menu-panel menu-paneluser clearfix">
                 	<i class="arrow"></i>
                     <ul class="menu-links">
                     	<li class="vip"><a href="thanh-vien/tin-dang-ban">Quản lý tin đang bán</a></li>
@@ -142,7 +142,7 @@
         	<div class="slick_vv">
             	<?php foreach($row_qc as $v){ ?>
                 <div>
-                	<p><a href="<?=$v['link']?>"><img src="thumb/550x80x1x90/<?=_upload_hinhanh_l.$v['photo']?>" alt="<?=$v['ten']?>" /></a></p>
+                	<p><a href="<?=$v['link']?>" class="dem_click_banner" data-id="<?=$v['id']?>"><img src="thumb/550x80x1x90/<?=_upload_hinhanh_l.$v['photo']?>" alt="<?=$v['ten']?>" /></a></p>
                 </div>
                 <?php }?>
             </div>

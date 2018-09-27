@@ -68,11 +68,12 @@ function get_tinyeuthich(){
 	$item_yeuthich = $d->result_array();
 }	
 function get_user(){
-	global $d,$items;
+	global $d,$items_thanhvien;
 	$d->reset();
 	$sql = "select * from #_thanhvien where id='".$_SESSION['user_w']['id']."'";
 	$d->query($sql);
-	$items = $d->fetch_array();
+	$items_thanhvien = $d->fetch_array();
+	
 }
 function get_danhgia(){
 	global $d, $count_dg, $url_link,$totalRows , $pageSize, $offset,$paging,$urlcu,$loaidanhgia,$item_user;

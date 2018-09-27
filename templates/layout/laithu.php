@@ -9,7 +9,7 @@
         <p>Hẫy điền đầy đủ và chính xác thông tin dưới đây để người bán có thể liên hệ và đặt lịch hẹn lái thử xe với bạn nhé !</p>
         <div class="content_tienich">
           <form class="form_tienich" id="form_tienich" name="form_tienich">
-            <input type="hidden" name="emailnguoiban" value="<?=$user_ban['email']?>">
+            <input type="hidden" name="idnguoiban" value="<?=$user_ban['id']?>">
               <div class="clearfix">
                 <p>Tiêu đề tin:</p>
                 <input type="text" readonly class="nodd" name="tieudetin" value="<?=$row_detail['ten']?>">

@@ -19,7 +19,8 @@
 	$namden=(int)$_GET['namden'];
 	$xuatsu=(int)$_GET['xuatsu'];
 	$dandong=(int)$_GET['dandong'];
-	$mucdotieuthu=(int)$_GET['mucdotieuthu'];
+	$nhienlieutu=(int)$_GET['nhienlieutu'];
+	$nhienlieuden=(int)$_GET['nhienlieuden'];
 
 	$tukhoa =  $_GET['tukhoa'];
 	$tukhoa = trim(strip_tags($tukhoa));    	
@@ -94,6 +95,20 @@
 		}
 		$where .=" and tinhtrang in(".substr($arr_tinhtrang1,0,-1).")";
 	}
+	if(!empty($xuatsu)){
+		$arr_xuatsu=explode('.',$_GET['xuatsu']);
+		foreach($arr_xuatsu as $v){
+			$arr_xuatsu1.="'".$v."',";
+		}
+		$where .=" and xuatsu in(".substr($arr_xuatsu1,0,-1).")";	
+	}
+	if(!empty($dandong)){
+		$arr_dandong=explode('.',$_GET['dandong']);
+		foreach($arr_dandong as $v){
+			$arr_dandong1.="'".$v."',";
+		}
+		$where .=" and dandong in(".substr($arr_dandong1,0,-1).")";	
+	}
 	if(!empty($giatu)){
 		$where .=" and giatien>=".$giatu;
 	}
@@ -115,14 +130,12 @@
 	if(!empty($quan)){
 		$where .= " and quan='".$quan."'";
 	}
-	if(!empty($xuatsu)){
-		$where .= " and xuatsu='".$xuatsu."'";
+	
+	if(!empty($nhienlieutu)){
+		$where .= " and mucdotieuthu>='".$nhienlieutu."'";
 	}
-	if(!empty($dandong)){
-		$where .= " and dandong='".$dandong."'";
-	}
-	if(!empty($mucdotieuthu)){
-		$where .= " and mucdotieuthu='".$mucdotieuthu."'";
+	if(!empty($nhienlieuden)){
+		$where .= " and mucdotieuthu<='".$nhienlieuden."'";
 	}
 	if(!empty($tukhoa)){
 		$where .= " and (ten$lang LIKE '%$tukhoa%')";

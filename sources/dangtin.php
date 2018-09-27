@@ -28,6 +28,11 @@
 			$title = "Đăng tin - Đăng tải hình ảnh";
 			$title_cat = "Đăng tin - Đăng tải hình ảnh";
 			break;
+			case 'tien-ich-nguoi-ban':
+				$template="dangtin/tienichnguoiban";
+				$title = "Đăng tin - Tiện ích người bán";
+				$title_cat = "Đăng tin - Tiện ích người bán";
+				break;
 		case 'xac-nhan':
 			$template="dangtin/xacnhan";
 			$title = "Đăng tin - Xác nhận";
@@ -103,6 +108,11 @@
 			}
 		}
 		if($_POST['pjax']==5){
+		
+			$_SESSION['dangtin']['tragop']=$_POST['tragop'];
+			$_SESSION['dangtin']['laithu']=$_POST['laithu'];
+		}
+		if($_POST['pjax']==6){
 			$_SESSION['dangtin']['tinhthanh']=$_POST['tinhthanh'];
 			$_SESSION['dangtin']['quanhuyen']=$_POST['quanhuyen'];
 		}

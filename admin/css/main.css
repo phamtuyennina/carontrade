@@ -768,6 +768,7 @@ ul.userDropdown li a:hover, ul.userMessage li a:hover {
 .nav li.user_li a span{background-image:url(../images/icon6.png) !important;background-size:16px 16px}
 .nav li.place_li a span{background-image:url(../images/icon01.png) !important;background-size:16px 16px}
 .nav li.search_li a span{background-image:url(../images/icon_tk.png) !important;background-size:16px 16px}
+.nav li.money_li a span{background-image:url(../images/get-money.svg) !important;background-size:16px 16px}
 /* Left navigation
 ================================================== */
 

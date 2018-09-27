@@ -6,6 +6,12 @@
 		case 'luutin':
 			luutin();
 			break;
+		case 'countslider':
+				countslider();
+				break;
+		case 'baocaovipham':
+			baocaovipham();
+			break;
 		case 'timkiemxe':
 			timkiemxe();
 			break;
@@ -44,6 +50,9 @@
 			break;
 		case 'xoatinchitiet':
 			xoatinchitiet();
+			break;
+	  case 'xoatinluu':
+			xoatinluu();
 			break;
 		case 'timxe':
 			timxe();
@@ -98,6 +107,24 @@
 	die;
 	}
 	die("<h2>ERROR</h2>");
+function countslider(){
+	global $id;
+	do_Statistics($_POST['id']);
+	
+}	
+function baocaovipham(){
+	global $d;
+	$id=$_POST['id'];
+	$data['tinxau']=1;
+	$d->reset();
+	$d->setTable('dangtin');
+	$d->setWhere('id', $id);
+	if($d->update($data)){
+		echo 0;
+	}else{
+		echo -1;
+	}	
+}	
 function luutin(){
 	global $d,$idtin,$user;
 	$idtin=$_POST['idtin'];
@@ -126,8 +153,9 @@ function luutin(){
 }	
 function dangkylaithu()
 {
-	global $d,$company;
-	if($_POST['capcha']!=$_SESSION['laithu']){
+	global $d,$company,$config_url,$user;
+	$user=info_user($_POST['idnguoiban']);
+	if($_POST['capcha']!=$_SESSION['tragop']){
 			echo json_encode(array("thongbao"=>"Mã bảo vệ không hợp lệ.","error"=>0));die;
 	}
 	include_once "phpMailer/class.phpmailer.php";
@@ -139,52 +167,62 @@ function dangkylaithu()
 	$mail->Password   = $pass_mail;
 	$mail->SetFrom($mail_host, $company['ten']);
 	$mail->AddAddress($_POST['email'], $company['ten']);
-	$mail->AddAddress($_POST['emailnguoiban'], $company['ten']);
+	$mail->AddAddress($user['email'], $company['ten']);
 	$mail->AddAddress($_POST['emaillaithu'], $company['ten']);
 	$mail->Subject    = '[CarOntrade.com] Thông báo đăng ký lái thử xe';
 	$mail->IsHTML(true);
-	$mail->CharSet = "utf-8";
-	$body = "<table>
-		<tr><td>
-			<p><a href='http://".$config_url."'>
-				<img src='http://".$config_url."/"._upload_hinhanh_l.$row_logo['photo']."' alt='".$company['ten']."' style='width:476px' />'</a>
-			</p>
-			<p></p>
-		</td></tr>
-		<tr><td>
-			<p>Xin chào ".$row[0]['hoten'].",</p>
-			<p></p>
-		</td></tr>
-		<tr><td>
-			<p>Bạn đã yêu cầu thiết lập lại mật khẩu cho tài khoản của bạn tại CarOntrade.com</p>
-			<p></p>
-		</td></tr>
-		<tr><td>
-			<p>Đây là mật khẩu mới của bạn: ".$matkhau." </p>
-			<p>Bấm vào <a href='http://".$config_url."/dang-nhap.html'>đây</a> để đăng nhập ! </p>
-			<p>Nếu bạn có thắc mắc hay cần sự hỗ trợ từ CarOntrade, vui lòng liên hệ bộ phận hỗ trợ
-khách hàng qua địa chỉ email hotrokhachhang@carontrade.com hoặc số điện thoại
-hotline 0126 4428 166.</p>
-			<p></p>
-		</td></tr>
-		<tr><td>
-		<p>Cám ơn bạn đã sử dụng dịch vụ của CarOntrade.com.</p>
-		<p></p>
-		<p>Trân trọng,</p>
-		<p>".$company['ten']."</p>
-	</td></tr><table>";
+	$mail->CharSet = "utf-8";	
+		$body = '<table>';
+		$body .= '
+			<tr>
+				<th colspan="2">&nbsp;</th>
+			</tr>
+			<tr>
+				<th colspan="2">Thư đăng ký lái thử từ website <a href="'.$_SERVER["SERVER_NAME"].'">'.$_SERVER["SERVER_NAME"].'</a></th>
+			</tr>
+			<tr>
+				<th colspan="2">&nbsp;</th>
+			</tr>
+			<tr>
+				<th>Họ tên người đăng ký:</th><td>'.$_POST['hotenlaithu'].'</td>
+			</tr>
+			<tr>
+				<th>Điện thoại người đăng ký:</th><td>'.$_POST['dienthoailaithu'].'</td>
+			</tr>
+			<tr>
+				<th>Email người đăng ký:</th><td>'.$_POST['emaillaithu'].'</td>
+			</tr>
+			<tr>
+				<th>Tiêu đề tin:</th><td>'.$_POST['tieudetin'].'</td>
+			</tr>
+			<tr>
+				<th>Mã tin:</th><td>'.$_POST['matin'].'</td>
+			</tr>
+			
+			<tr>
+				<th>Họ tên người bán :</th><td>'.$user['hoten'].'</td>
+			</tr>
+			<tr>
+				<th>Điện thoại người bán :</th><td>'.$user['dienthoai'].'</td>
+			</tr>
+			<tr>
+				<th>Email người bán :</th><td>'.$user['email'].'</td>
+			</tr>';
+		$body .= '</table>';
 	$mail->Body = $body;
+	dump($body);
 	if($mail->Send()){
 		$d->update($data);
-			echo json_encode(array("title"=>"Lấy mật khẩu thất bại","thongbao"=>"Hệ thống bị lỗi. Vui lòng thử lại sau !","error"=>0));
+			echo json_encode(array("thongbao"=>"Hệ thống bị lỗi. Vui lòng thử lại sau !","error"=>1));
 	}else{
-		echo json_encode(array("title"=>"Lấy mật khẩu thất bại","thongbao"=>"Hệ thống bị lỗi. Vui lòng thử lại sau !","error"=>0));
+		echo json_encode(array("thongbao"=>"Hệ thống bị lỗi. Vui lòng thử lại sau !","error"=>0));
 	}
 	
 }
 function dangkytragop()
 {
-	global $d,$company;
+	global $d,$company,$config_url,$user;
+	$user=info_user($_POST['idnguoiban']);
 	if($_POST['capcha']!=$_SESSION['laithu']){
 			echo json_encode(array("thongbao"=>"Mã bảo vệ không hợp lệ.","error"=>0));die;
 	}
@@ -197,46 +235,55 @@ function dangkytragop()
 	$mail->Password   = $pass_mail;
 	$mail->SetFrom($mail_host, $company['ten']);
 	$mail->AddAddress($_POST['email'], $company['ten']);
-	$mail->AddAddress($_POST['emailnguoiban'], $company['ten']);
+	$mail->AddAddress($user['email'], $company['ten']);
 	$mail->AddAddress($_POST['emaillaithu'], $company['ten']);
-	$mail->Subject    = '[CarOntrade.com] Thông báo đăng ký lái thử xe';
+	$mail->Subject    = '[CarOntrade.com] Thông báo thông báo hỗ trợ vay trả góp';
 	$mail->IsHTML(true);
-	$mail->CharSet = "utf-8";
-	$body = "<table>
-		<tr><td>
-			<p><a href='http://".$config_url."'>
-				<img src='http://".$config_url."/"._upload_hinhanh_l.$row_logo['photo']."' alt='".$company['ten']."' style='width:476px' />'</a>
-			</p>
-			<p></p>
-		</td></tr>
-		<tr><td>
-			<p>Xin chào ".$row[0]['hoten'].",</p>
-			<p></p>
-		</td></tr>
-		<tr><td>
-			<p>Bạn đã yêu cầu thiết lập lại mật khẩu cho tài khoản của bạn tại CarOntrade.com</p>
-			<p></p>
-		</td></tr>
-		<tr><td>
-			<p>Đây là mật khẩu mới của bạn: ".$matkhau." </p>
-			<p>Bấm vào <a href='http://".$config_url."/dang-nhap.html'>đây</a> để đăng nhập ! </p>
-			<p>Nếu bạn có thắc mắc hay cần sự hỗ trợ từ CarOntrade, vui lòng liên hệ bộ phận hỗ trợ
-khách hàng qua địa chỉ email hotrokhachhang@carontrade.com hoặc số điện thoại
-hotline 0126 4428 166.</p>
-			<p></p>
-		</td></tr>
-		<tr><td>
-		<p>Cám ơn bạn đã sử dụng dịch vụ của CarOntrade.com.</p>
-		<p></p>
-		<p>Trân trọng,</p>
-		<p>".$company['ten']."</p>
-	</td></tr><table>";
+	$mail->CharSet = "utf-8";	
+		$body = '<table>';
+		$body .= '
+			<tr>
+				<th colspan="2">&nbsp;</th>
+			</tr>
+			<tr>
+				<th colspan="2">Thư hỗ trợ vay trả góp từ website <a href="'.$_SERVER["SERVER_NAME"].'">'.$_SERVER["SERVER_NAME"].'</a></th>
+			</tr>
+			<tr>
+				<th colspan="2">&nbsp;</th>
+			</tr>
+			<tr>
+				<th>Họ tên người đăng ký:</th><td>'.$_POST['hotenlaithu'].'</td>
+			</tr>
+			<tr>
+				<th>Điện thoại người đăng ký:</th><td>'.$_POST['dienthoailaithu'].'</td>
+			</tr>
+			<tr>
+				<th>Email người đăng ký:</th><td>'.$_POST['emaillaithu'].'</td>
+			</tr>
+			<tr>
+				<th>Tiêu đề tin:</th><td>'.$_POST['tieudetin'].'</td>
+			</tr>
+			<tr>
+				<th>Mã tin:</th><td>'.$_POST['matin'].'</td>
+			</tr>
+			
+			<tr>
+				<th>Họ tên người bán :</th><td>'.$user['hoten'].'</td>
+			</tr>
+			<tr>
+				<th>Điện thoại người bán :</th><td>'.$user['dienthoai'].'</td>
+			</tr>
+			<tr>
+				<th>Email người bán :</th><td>'.$user['email'].'</td>
+			</tr>';
+		$body .= '</table>';
 	$mail->Body = $body;
+	dump($body);
 	if($mail->Send()){
 		$d->update($data);
-			echo json_encode(array("title"=>"Lấy mật khẩu thất bại","thongbao"=>"Hệ thống bị lỗi. Vui lòng thử lại sau !","error"=>0));
+			echo json_encode(array("thongbao"=>"Hệ thống bị lỗi. Vui lòng thử lại sau !","error"=>1));
 	}else{
-		echo json_encode(array("title"=>"Lấy mật khẩu thất bại","thongbao"=>"Hệ thống bị lỗi. Vui lòng thử lại sau !","error"=>0));
+		echo json_encode(array("thongbao"=>"Hệ thống bị lỗi. Vui lòng thử lại sau !","error"=>0));
 	}
 	
 }
@@ -381,6 +428,9 @@ function capnhatthongtin(){
 	if($d->update($data)){
 		$_SESSION['user_w']['hoten'] = $data['hoten'];
 		$_SESSION['user_w']['dienthoai'] =$data['dienthoai'];
+		$_SESSION['user_w']['email'] = $data['email'];
+		$_SESSION['user_w']['congty'] = $data['tencongty'];
+		$_SESSION['user_w']['dienthoai'] = $data['dienthoai'];
 		echo json_encode(array("code"=>1));
 	}else{
 		echo json_encode(array("code"=>0));
@@ -408,6 +458,9 @@ function taotinfix(){
 	$_SESSION['dangtin']['sokm']=$item['sokm'];
 	$_SESSION['dangtin']['mausac']=$item['mausac'];
 	$_SESSION['dangtin']['giatien']=$item['giatien'];
+	$_SESSION['dangtin']['xuatsu']=$item['xuatsu'];
+	$_SESSION['dangtin']['dandong']=$item['dandong'];
+	$_SESSION['dangtin']['mucdotieuthu']=$item['mucdotieuthu'];
 	$_SESSION['dangtin']['mota']=$item['noidung'];
 	$_SESSION['dangtin']['ten']=$item['ten'];
 	$_SESSION['dangtin']['tinhthanh']=$item['quan'];
@@ -462,7 +515,27 @@ function xoatinchitiet(){
 		$d->query($sql);
 	}
 	echo 1;
-
+}
+function xoatinluu(){
+	global $d;
+	$idtin=(int)$_POST['id'];
+	$idtin =  themdau($idtin);
+	$user=$_SESSION['user_w']['id'];
+	$d->reset();
+	$sql = "select luutin from #_thanhvien where id='".$user."'";
+	$d->query($sql);
+	$row = $d->fetch_array();
+	$ar_tl=explode(',',$row['luutin']);
+	$result1=implode(',',array_values(array_diff($ar_tl,array($idtin))));
+	$data['luutin']=$result1;
+	$d->reset();
+	$d->setTable('thanhvien');
+	$d->setWhere('id', $user);
+	if($d->update($data)){
+		echo 0;
+	}else{
+		echo -1;
+	}	
 }
 function timxe(){
 	global $d;
@@ -572,8 +645,14 @@ function luunhap(){
 		}
 	}
 	if($_POST['pjax']==5){
+		$_SESSION['dangtin']['tragop']=$_POST['tragop'];
+		$_SESSION['dangtin']['laithu']=$_POST['laithu'];
+	}
+	if($_POST['pjax']==6){
 		$_SESSION['dangtin']['tinhthanh']=$_POST['tinhthanh'];
 		$_SESSION['dangtin']['quanhuyen']=$_POST['quanhuyen'];
+		$_SESSION['dangtin']['loaitin']=$_POST['loaitin'];
+		$_SESSION['dangtin']['goitin']=$_POST['goitin'];
 	}
 
 	$data['id_hang']=$_SESSION['dangtin']['nhasanxuat'];
@@ -597,10 +676,13 @@ function luunhap(){
 	$data['huyen']=(int)$_SESSION['dangtin']['quanhuyen'];
 	$data['id_user']=(int)$_SESSION['user_w']['id'];
 	$data['loaihinh']=changeTitle((string)$_SESSION['user_w']['loaithanhvien']);
-	$data['xuatsu']=(int)$_POST['xuatsu'];
-	$data['dandong']=(int)$_POST['dandong'];
-	$data['mucdotieuthu']=(int)$_POST['mucdotieuthu'];
-
+	$data['xuatsu']=(int)$_SESSION['dangtin']['xuatsu'];
+	$data['loaitin']=(int)$_SESSION['dangtin']['loaitin'];
+	$data['goitin']=(int)$_SESSION['dangtin']['goitin'];
+	$data['dandong']=(int)$_SESSION['dangtin']['dandong'];
+	$data['mucdotieuthu']=str_replace(',','',$_SESSION['dangtin']['giatien']);
+	$data['laithu']=(int)$_SESSION['dangtin']['laithu'];
+	$data['tragop']=(int)$_SESSION['dangtin']['tragop'];
 	$data['hoten']=(string)$_SESSION['user_w']['hoten'];
 	$data['dienthoai']=(string)$_SESSION['user_w']['dienthoai'];
 	$data['email']=(string)$_SESSION['user_w']['email'];
@@ -682,8 +764,14 @@ function luubaiviet(){
 		}
 	}
 	if($_POST['pjax']==5){
+		$_SESSION['dangtin']['tragop']=$_POST['tragop'];
+		$_SESSION['dangtin']['laithu']=$_POST['laithu'];
+	}
+	if($_POST['pjax']==6){
 		$_SESSION['dangtin']['tinhthanh']=$_POST['tinhthanh'];
 		$_SESSION['dangtin']['quanhuyen']=$_POST['quanhuyen'];
+		$_SESSION['dangtin']['loaitin']=$_POST['loaitin'];
+		$_SESSION['dangtin']['goitin']=$_POST['goitin'];
 	}
 	if($_SESSION['dangtin']['fix']==true){
 		$data['kiemduyet']=0;
@@ -692,7 +780,8 @@ function luubaiviet(){
 	$data['id_kieudang']=$_SESSION['dangtin']['kieudang'];
 	$data['id_mauxe']=$_SESSION['dangtin']['mauxe'];
 	$data['nam']=$_SESSION['dangtin']['nam'];
-
+	$data['loaitin']=(int)$_SESSION['dangtin']['loaitin'];
+	$data['goitin']=(int)$_SESSION['dangtin']['goitin'];
 	$data['hopso']=(string)$_SESSION['dangtin']['hopso'];
 	$data['soghe']=(string)$_SESSION['dangtin']['soghe'];
 	$data['dongco']=(string)$_SESSION['dangtin']['dongco'];
@@ -708,10 +797,12 @@ function luubaiviet(){
 	$data['quan']=(int)$_SESSION['dangtin']['tinhthanh'];
 	$data['huyen']=(int)$_SESSION['dangtin']['quanhuyen'];
 	$data['id_user']=(int)$_SESSION['user_w']['id'];
+	$data['laithu']=(int)$_SESSION['dangtin']['laithu'];
+	$data['tragop']=(int)$_SESSION['dangtin']['tragop'];
 	$data['trangthailuu']=2;
-	$data['xuatsu']=(int)$_POST['xuatsu'];
-	$data['dandong']=(int)$_POST['dandong'];
-	$data['mucdotieuthu']=(int)$_POST['mucdotieuthu'];
+	$data['xuatsu']=(int)$_SESSION['dangtin']['xuatsu'];
+	$data['dandong']=(int)$_SESSION['dangtin']['dandong'];
+	$data['mucdotieuthu']=str_replace(',','',$_SESSION['dangtin']['giatien']);
 	$data['hienthi']=1;
 	$data['ngaytao']=time();
 	$data['hoten']=(string)$_SESSION['user_w']['hoten'];
@@ -1017,6 +1108,7 @@ function dangkythanhvien(){
 	$data['diachi']=magic_quote($_POST['diachi']);
 	$data['loaithanhvien']=($_POST['loaithanhvien']);
 	$data['nguoigioithieu']=$_POST['nguoigioithieu'];
+	$data['magioithieu']=taomarandom('select * from #_thanhvien where magioithieu=');
 	$data['kichhoat']=0;
 	$data['maxacnhan']=time();
 
@@ -1062,7 +1154,7 @@ function dangkythanhvien(){
 			<p>
 				Dưới dây là Mã Giới Thiệu của riêng bạn, hãy giới thiệu mã này cho bạn bè của bạn khi đăng ký thành viên tại CarOntrade, nhập mã này trong quá trình đăng ký để cả hai cùng nhận được Mã Khuyến Mãi nhé!
 			</p>
-			<p>Mã: xxxxxxxxxxx</p>
+			<p>Mã: ".$data['magioithieu']."</p>
 			<p>Nếu bạn có thắc mắc hay cần sự hỗ trợ từ CarOntrade, vui lòng liên hệ bộ phận hỗ trợ
 khách hàng qua địa chỉ email hotrokhachhang@carontrade.com hoặc số điện thoại
 hotline 0126 4428 166.</p>

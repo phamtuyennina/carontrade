@@ -13,13 +13,14 @@
 		$d->query($sql);
 		$nguoiduoithieu = $d->detch_array();
 		$makhuyenmai=taomakhuyenmai('select * from #_makhuyenmai where makhuyenmai=',$nguoiduoithieu['email'],$row[0]['email']);
-		guicodekhuyenmai($nguoiduoithieu['email'],$nguoiduoithieu['hoten']);
+		guicodekhuyenmai($nguoiduoithieu['email'],$nguoiduoithieu['hoten'],$makhuyenmai);
+		guicodekhuyenmai($row[0]['email'],$row[0]['hoten'],$makhuyenmai);
 	}
 	
 	if($row[0]['kichhoat']==1){
 		redirect('//'.$config_url.'/dang-nhap.html');
 	}
-	guicodekhuyenmai($row[0]['email'],$row[0]['hoten']);
+	
 	$sql = "update table_thanhvien SET kichhoat=1,ngaytao=".time()." WHERE  maxacnhan = '".$id."'";
 	$data = mysql_query($sql) or die("Not query sql");
 	transfer("Tài khoản của bạn đã được kích hoạt thành công.", '//'.$config_url.'/dang-nhap.html');

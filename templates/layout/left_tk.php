@@ -73,7 +73,22 @@
 	$d->reset();
 	$sql="select id,ten$lang as ten,tenkhongdau from #_quanly_danhmuc where hienthi=1 and type='loaihopso' order by stt desc";
 	$d->query($sql);
-	$loaihopso=$d->result_array();		
+	$loaihopso=$d->result_array();	
+	
+	$d->reset();
+	$sql="select id,ten$lang as ten,tenkhongdau from #_quanly_danhmuc where hienthi=1 and type='xuatsu' order by stt desc";
+	$d->query($sql);
+	$xuatsu=$d->result_array();	
+
+	$d->reset();
+	$sql="select id,ten$lang as ten,tenkhongdau from #_quanly_danhmuc where hienthi=1 and type='dandong' order by stt desc";
+	$d->query($sql);
+	$dandong=$d->result_array();	
+	
+	$d->reset();
+	$sql="select ten$lang as ten,tenkhongdau,id,mucdotieuthu from #_quanly_danhmuc where hienthi=1 and type='mucdotieuthu' order by stt,id desc";
+	$d->query($sql);
+	$mucdotieuthu=$d->result_array();			
 ?>
 <div class="title_timkiem">
 	<p>Tìm kiếm</p>
@@ -206,6 +221,40 @@
             <?php }?>
         </div>
     </div>
+		
+		<div class="dimension">
+    	<div class="dimension-summary">
+        	<p>
+            	<span>Dẫn động</span>
+                <a href="javascript:void(0)" class="toggle-panel">Hide</a>
+            </p>
+        </div>
+        <div class="dimension-search dimension-mausac dimension-selection">
+        	<input type="hidden" name="dandong" value="<?=$_GET['dandong']?>" />
+        	<?php $ar_danong=explode('.',$_GET['dandong']); foreach($dandong as $v){ ?>
+             <div class="item-dandong <?php if(in_array($v['id'],$ar_danong)){echo 'active';} ?>" data-id="<?=$v['id']?>" onclick="click_div(this);">
+            	 <?=$v['ten']?>
+            </div>
+            <?php }?>
+        </div>
+    </div>
+		<div class="dimension">
+    	<div class="dimension-summary">
+        	<p>
+            	<span>Xuất sứ</span>
+                <a href="javascript:void(0)" class="toggle-panel">Hide</a>
+            </p>
+        </div>
+        <div class="dimension-search dimension-mausac dimension-selection">
+        	<input type="hidden" name="xuatsu" value="<?=$_GET['dandong']?>" />
+        	<?php $ar_xuatsu=explode('.',$_GET['xuatsu']); foreach($xuatsu as $v){ ?>
+             <div class="item-xuatsu <?php if(in_array($v['id'],$ar_xuatsu)){echo 'active';} ?>" data-id="<?=$v['id']?>" onclick="click_div(this);">
+            	 <?=$v['ten']?>
+            </div>
+            <?php }?>
+        </div>
+    </div>
+		
     <div class="dimension">
     	<div class="dimension-summary">
         	<p>
@@ -256,6 +305,42 @@
         </div>
     </div>
     
+		<div class="dimension">
+    	<div class="dimension-summary">
+        	<p>
+            	<span>Mức độ tiêu thụ nhiên liệu</span>
+                <a href="javascript:void(0)" class="toggle-panel">Hide</a>
+            </p>
+        </div>
+        <div class="dimension-search1 dimension-gia dimension-selection">
+        	<div class="bx_form1 clearfix">
+                <div class="tk100">
+                    <div class="select_search">
+                        <select id="nhienlietu" name="nhienlietu" class="js-example-responsive1" data-placeholder="Thấp nhất">
+                            <option></option>
+                            <?php foreach($mucdotieuthu as $v){ ?>
+                            <option <?=((int)$_GET['nhienlietu']==$v['id'])?'selected':''?>  value="<?=$v['id']?>"><?=$v['ten']?></option>
+                            <?php }?>
+                        </select>
+                    </div>
+               </div>
+        	</div>
+            <div class="bx_form1 clearfix">
+                <div class="tk100">
+                    <div class="select_search">
+                        <select id="nhienlieuden" name="nhienlieuden" class="js-example-responsive1" data-placeholder="Cao nhất">
+                            <option></option>
+                            <?php foreach($mucdotieuthu as $v){ ?>
+                              <option <?=((int)$_GET['nhienlietu']==$v['id'])?'selected':''?>  value="<?=$v['id']?>"><?=$v['ten']?></option>
+                            <?php }?>
+                        </select>
+                    </div>
+               </div>
+        	</div>
+             <button type="button" class="timtukhoa">Tìm</button>
+   	 	</div>
+    </div>
+		
     <div class="dimension">
     	<div class="dimension-summary">
         	<p>

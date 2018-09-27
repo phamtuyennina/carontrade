@@ -3,7 +3,9 @@
 	@define ( '_template' , './templates/');
 	@define ( '_source' , './sources/');
 	@define ( '_lib' , './lib/');
-		
+	ini_set('max_execution_time', "-1");
+	ini_set('max_limit_size', "-1");
+	ini_set("memory_limit","-1");		
 	include_once _lib."config.php";
 	include_once _lib."constant.php";
 	include_once _lib."functions.php";
@@ -33,9 +35,15 @@
 	$company= $d->fetch_array();
 	switch($com){
 		####Phân quyền
+		case 'import2':
+        	$source = "import2";
+        break;
 		case 'phanquyen':
 			$source = "phanquyen";
 			break;
+		case 'statistics':
+				$source = "statistics";
+				break;	
 		case 'binhluan':
 			$source = "binhluan";
 			break;
@@ -51,6 +59,21 @@
 		case 'dangtin':
 			$source = "dangtin";
 			break;
+		case 'tinthuong':
+				$source = "dangtin";
+				break;
+		case 'khuyenmai':
+				$source = "dangtin";
+				break;
+		case 'tietkiem':
+				$source = "dangtin";
+				break;
+		case 'linhdong':
+				$source = "dangtin";
+				break;
+		case 'supper':
+				$source = "dangtin";
+				break;
 		case 'chuaduyet':
 			$source = "chuaduyet";
 			break;

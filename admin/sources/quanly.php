@@ -177,10 +177,12 @@ function save_man(){
 		}	
 		$data['gia'] = doubleval(str_replace(',','',$_POST['gia']));
 		$data['sokm'] = str_replace(',','',$_POST['sokm']);
+		$data['mucdotieuthu'] = str_replace(',','',$_POST['mucdotieuthu']);
 		$data['tenkhongdau'] = changeTitle($_POST['ten']);
 		$data['type'] = $_REQUEST['type'];
 		$data['stt'] = $_POST['stt'];
 		$data['stt'] = $_POST['macode'];
+		$data['thoigian'] = $_POST['thoigian'];
 		$data['hienthi'] = isset($_POST['hienthi']) ? 1 : 0;
 		$data['ngaysua'] = time();
 		
@@ -210,10 +212,12 @@ function save_man(){
 		$data['gia'] = doubleval(str_replace(',','',$_POST['gia']));
 		$data['sokm'] = str_replace(',','',$_POST['sokm']);
 		$data['tenkhongdau'] = changeTitle($_POST['ten']);
+		$data['mucdotieuthu'] = str_replace(',','',$_POST['mucdotieuthu']);
 		$data['stt'] = $_POST['stt'];
 		$data['hienthi'] = isset($_POST['hienthi']) ? 1 : 0;
 		$data['ngaytao'] = time();
 		$data['type'] = $_REQUEST['type'];
+		$data['thoigian'] = $_POST['thoigian'];
 		foreach ($config['lang'] as $key => $value) {
 			$data['ten'.$key] = $_POST['ten'.$key];
 			$data['mota'.$key] = $_POST['mota'.$key];			

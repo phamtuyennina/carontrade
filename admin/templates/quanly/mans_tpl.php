@@ -89,7 +89,7 @@
         </td> 
    		<td class="title_name_data">
            <?php if($_GET['type']!='sokm'){ ?>
-            <a href="index.php?com=quanly&act=edit&id=<?=$items[$i]['id']?>&type=<?=$_REQUEST['type']?><?php if($_REQUEST['p']!='') echo'&p='.$_REQUEST['p'];?>" class="tipS SC_bold"><?=(!empty($items[$i]['gia']))?number_format($items[$i]['gia'],0, ',', '.').' vnđ':$items[$i]['ten']?></a>
+            <a href="index.php?com=quanly&act=edit&id=<?=$items[$i]['id']?>&type=<?=$_REQUEST['type']?><?php if($_REQUEST['p']!='') echo'&p='.$_REQUEST['p'];?>" class="tipS SC_bold"><?=($_GET['type']=='giaxe')?number_format($items[$i]['gia'],0, ',', '.').' vnđ':$items[$i]['ten']?></a>
            <?php }else{?>
             <a href="index.php?com=quanly&act=edit&id=<?=$items[$i]['id']?>&type=<?=$_REQUEST['type']?><?php if($_REQUEST['p']!='') echo'&p='.$_REQUEST['p'];?>" class="tipS SC_bold"><?=number_format($items[$i]['sokm'],0, ',', '.')?> km</a>
            <?php }?>
@@ -113,6 +113,3 @@
   </table>
 </div>
 <div class="pagination">  <?=pagesListLimitadmin($url_link , $totalRows , $pageSize, $offset)?></div>
-
-
-

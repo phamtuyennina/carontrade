@@ -8,6 +8,12 @@
 	$sql="select ten$lang as ten,tenkhongdau,id from #_quanly_danhmuc where hienthi=1 and type='dandong' order by stt,id desc";
 	$d->query($sql);
 	$dandong=$d->result_array();	
+	
+	$d->reset();
+	$sql="select ten$lang as ten,tenkhongdau,id,mucdotieuthu from #_quanly_danhmuc where hienthi=1 and type='mucdotieuthu' order by stt,id desc";
+	$d->query($sql);
+	$mucdotieuthu=$d->result_array();		
+	
 
 	$d->reset();
 	$sql="select ten$lang as ten,tenkhongdau,id,photo from #_product_danhmuc where hienthi=1 and type='loaixe' order by stt,id desc";
@@ -221,7 +227,30 @@
                                 </div>
                             </div>
                         </div>
-                       
+												<div class="bx_form1 clearfix">
+ 												 <div class="tk50">
+ 														 <div class="select_search select_search_nhienlieu">
+ 																 <span class="pos">Mức độ tiêu thụ từ:</span>
+ 																	 <select id="nhienlieutu" name="nhienlieutu" class="js-example-responsive1" data-placeholder="">
+ 																			 <option></option>
+ 																			 <?php foreach($mucdotieuthu as $v){ ?>
+ 																			 <option value="<?=$v['mucdotieuthu']?>"><?=$v['ten']?></option>
+ 																			 <?php }?>
+ 																	 </select>
+ 															 </div>
+ 													 </div>
+ 													 <div class="tk50">
+ 														 <div class="select_search select_search_nhienlieu">
+ 																 <span class="pos">Mức độ tiêu thụ đến:</span>
+ 																	 <select id="nhienlieuden" name="nhienlieuden" class="js-example-responsive1" data-placeholder="">
+ 																			 <option></option>
+ 																			 <?php foreach($mucdotieuthu as $v){ ?>
+ 																			 <option value="<?=$v['mucdotieuthu']?>"><?=$v['ten']?></option>
+ 																			 <?php }?>
+ 																	 </select>
+ 															 </div>
+ 													 </div>
+ 											 </div>
                        <div class="bx_form1 clearfix">
                         	<div class="tk100">
                             	<div class="select_search">

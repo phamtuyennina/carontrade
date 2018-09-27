@@ -24,6 +24,174 @@ function send_face($link){
 		echo ($messger);
 		die;
 }
+function Dot2LongIP ($IPaddr)
+  {
+      if ($IPaddr == "")
+      {
+      	return 0;
+      }
+      else {
+	      $ip = explode(".", $IPaddr);
+	      return ($ip[3] + $ip[2] * 256 + $ip[1] * 256 * 256 + $ip[0] * 256 * 256 * 256);	
+      }
+  }
+	
+function getLocationInfoByIp($ip){
+		global $d,$row;
+    $ipv4=Dot2LongIP($ip);
+		$d->reset();
+		$sql = "SELECT id,ten FROM table_ip WHERE  numberfrom >= $ipv4 order by numberfrom";
+		$d->query($sql);
+		$row = $d->fetch_array();
+
+		if(!empty($row['id'])){
+			return $row['ten'];
+		}
+		return '';
+}
+function getBrowser ($browser)
+{   
+	$browsertyp = "UnKnown";
+	if ($browser)
+	{
+		if (strpos($browser, "Mozilla/5.0")) $browsertyp = "Mozilla";
+		if (strpos($browser, "Mozilla/4")) $browsertyp = "Netscape";
+		if (strpos($browser, "Mozilla/3")) $browsertyp = "Netscape";
+		if (strpos($browser, "Firefox") || strpos($browser, "Firebird")) $browsertyp = "Firefox";
+		if (strpos($browser, "MSIE")) $browsertyp = "Internet Explorer";
+		if (strpos($browser, "Opera")) $browsertyp = "Opera";
+		if (strpos($browser, "Opera Mini")) $browsertyp = "Opera Mini";			
+		if (strpos($browser, "Netscape")) $browsertyp = "Netscape";
+		if (strpos($browser, "Camino")) $browsertyp = "Camino";
+		if (strpos($browser, "Galeon")) $browsertyp = "Galeon";
+		if (strpos($browser, "Konqueror")) $browsertyp = "Konqueror";      
+		if (strpos($browser, "Safari")) $browsertyp = "Safari";
+		if (strpos($browser, "Chrome")) $browsertyp = "Chrome";      
+		if (strpos($browser, "OmniWeb")) $browsertyp = "OmniWeb";
+		if (strpos($browser, "Flock")) $browsertyp = "Firefox Flock";
+		if (strpos($browser, "Lynx")) $browsertyp = "Lynx";
+		if (strpos($browser, "Mosaic")) $browsertyp = "Mosaic";
+		if (strpos($browser, "Shiretoko")) $browsertyp = "Shiretoko";
+		if (strpos($browser, "IceCat")) $browsertyp = "IceCat";			
+		if (strpos($browser, "BlackBerry")) $browsertyp = "BlackBerry";			
+		if (strpos($browser, "Googlebot") || strpos($browser, "www.google.com")) $browsertyp = "Google Bot";
+		if (strpos($browser, "Yahoo") || strpos($browser, "help.yahoo.com")) $browsertyp = "Yahoo Bot";
+		if (strpos($browser, "Pingdom") || strpos($browser, "pingdom.com")) $browsertyp = "Pingdom Bot";
+		if (strpos($browser, "coccoc") || strpos($browser, "help.coccoc.com")) $browsertyp = "Coccoc bot";
+		if (strpos($browser, "MJ12bot") || strpos($browser, "www.majestic12.co.uk")) $browsertyp = "MJ12 Bot";   
+		if (strpos($browser, "Baiduspider") || strpos($browser, "www.baidu.com")) $browsertyp = "Baidu Bot"; 
+		if (strpos($browser, "AhrefsBot") || strpos($browser, "ahrefs.com")) $browsertyp = "Ahrefs Bot"; 
+	}    
+	return $browsertyp;
+}  
+// Strat func
+function getOs ($os)
+{
+	$ostyp = "UnKnown";
+	if ($os)
+	{
+		if (strpos($os, "Win95") || strpos($os, "Windows 95")) $ostyp = "Windows 95";
+		if (strpos($os, "Win98") || strpos($os, "Windows 98")) $ostyp = "Windows 98";
+		if (strpos($os, "WinNT") || strpos($os, "Windows NT")) $ostyps = "Windows NT";
+		if (strpos($os, "WinNT 5.0") || strpos($os, "Windows NT 5.0")) $ostyp = "Windows 2000";
+		if (strpos($os, "WinNT 5.1") || strpos($os, "Windows NT 5.1")) $ostyp = "Windows XP";
+		if (strpos($os, "WinNT 6.0") || strpos($os, "Windows NT 6.0")) $ostyp = "Windows Vista";
+		if (strpos($os, "WinNT 6.1") || strpos($os, "Windows NT 6.1")) $ostyp = "Windows 7";
+		if (strpos($os, "WinNT 6.2") || strpos($os, "Windows NT 6.2")) $ostyp = "Windows 8";
+		if (strpos($os, "WinNT 6.3") || strpos($os, "Windows NT 6.3")) $ostyp = "Windows 8";
+		if (strpos($os, "WinNT 10.0") || strpos($os, "Windows NT 10.0")) $ostyp = "Windows 10";
+		if (strpos($os, "Linux")) $ostyp = "Linux";
+		if (strpos($os, "OS/2")) $ostyp = "OS/2";
+		if (strpos($os, "Sun")) $ostyp = "Sun OS";
+		if (strpos($os, "BB10")) $ostyp = "BlackBerry";
+		if (strpos($os, "iPod")) $ostyp = "iPodTouch";
+		if (strpos($os, "iPhone")) $ostyp = "iPhone";
+		if (strpos($os, "iPad")) $ostyp = "iPad";
+		if (strpos($os, "Android")) $ostyp = "Android";			
+		if (strpos($os, "Windows Phone")) $ostyp = "Windows Phone";						
+		if (strpos($os, "Macintosh") || strpos($os, "Mac_PowerPC")) $ostyp = "Mac OS";
+		if (strpos($os, "Yahoo") || strpos($os, "help.yahoo.com")) $ostyp = "Yahoo Bot";
+		if (strpos($os, "Googlebot") || strpos($os, "www.google.com")) $ostyp = "Google Bot";
+		if (strpos($os, "Pingdom") || strpos($os, "pingdom.com")) $ostyp = "Pingdom Bot";
+		if (strpos($os, "coccoc") || strpos($os, "help.coccoc.com")) $ostyp = "Coccoc Bot";
+		if (strpos($os, "MJ12bot") || strpos($os, "www.majestic12.co.uk")) $ostyp = "MJ12 Bot";
+		if (strpos($os, "Baiduspider") || strpos($os, "www.baidu.com")) $ostyp = "Baidu Bot";
+		if (strpos($os, "AhrefsBot") || strpos($os, "ahrefs.com")) $ostyp = "Ahrefs Bot";              
+	}
+	return $ostyp;
+}
+function do_Statistics($id_hinhanh) {
+	global $d;
+
+//thong ke web counter     
+	$domain_ref = trim($_SERVER['HTTP_REFERER']);
+	$domain_ref = str_replace("https://", "", $domain_ref);
+	$domain_ref = str_replace("http://", "", $domain_ref);
+	$domain_ref = str_replace("www.", "", $domain_ref);
+	$domain_ref = substr($domain_ref, 0, strpos($domain_ref, "/"));    
+	$my_domain = $_SERVER['HTTP_HOST'];
+	$my_domain = str_replace("www.", "", $my_domain);    
+	if (($domain_ref != $my_domain) && ($domain_ref != 'localhost') && ($domain_ref != '')){      
+		$query= "SELECT id,num_click FROM table_counter_website WHERE domain='" . $domain_ref . "' and id_hinhanh=". $id_hinhanh ."";
+		$d->query($query);
+		if ($d->num_rows()>0){
+			$row_ck = $d->fetch_array();
+			$num_click = ($row_ck['num_click'] + 1);
+			$date_click = time();               
+			$idw=$row_ck['id'];
+			$sql2="UPDATE table_counter_website SET num_click='$num_click',date_click='$date_click' WHERE id = '$idw' and id_hinhanh=". $id_hinhanh ."";
+			$result2=$d->query($sql2); 
+		}else{                
+			$num_click = 1;
+			$date_click = time();       
+			$query = "INSERT INTO table_counter_website (domain, num_click,date_click,id_hinhanh) VALUES ('$domain_ref','$num_click', ' $date_click', '$id_hinhanh')";
+			$d->query($query);
+		}
+	}
+	//--------------------------------------------------------------------------------
+
+$ip = $_SERVER['REMOTE_ADDR'];
+$locktime        =  5;
+$locktime        =    $locktime * 60;
+$now             =    time();
+
+$query             =    "SELECT COUNT(*) AS visitip FROM table_counter_detail WHERE ip='$ip' AND (date_time+'$locktime')>'$now' and id_hinhanh=".$id_hinhanh."";
+	$vip  = $d->fetch_array($d->query($query));
+	$items             =    $vip['visitip'];
+	
+	//insert counter
+	 if (empty($items))
+	{
+		$time = time();
+		
+		$agent = $_SERVER['HTTP_USER_AGENT'];			
+		$browser = getBrowser($agent);
+		$os = getOs($agent);
+		$date = date("d/m/Y"); 
+		$datestamp= strtotime(date("m/d/Y"));
+
+		$sql = "SELECT * FROM table_counter_sum WHERE date_log ='{$date}' and id_hinhanh=".$id_hinhanh."";
+		$result = $d->query($sql);
+		if ($row = $d->fetch_array($result))
+		{
+			$query = "UPDATE table_counter_sum SET count=count+1 WHERE id={$row['id']} and id_hinhanh=".$id_hinhanh."";
+		} else
+		{
+			$query = "INSERT INTO table_counter_sum (date_log,datestamp,count,id_hinhanh) VALUES ('{$date}','{$datestamp}',1,'$id_hinhanh')";
+		}
+	
+		$d->query($query);
+		$cot_d['date_log'] = $date;
+		$cot_d['browser'] = $browser;
+		$cot_d['ip'] = $ip;
+		$cot_d['os'] = $os;
+		$cot_d['quocgia'] = getLocationInfoByIp($ip);
+		$cot_d['id_hinhanh'] = $id_hinhanh;
+		$cot_d['date_time'] = $time;
+		$d->setTable('counter_detail');
+		$d->insert($cot_d); 					
+	} 			
+}
 function taomakhuyenmai($str1,$email1,$email2) {
 		global $d,$str;
 		$d->reset();
@@ -494,31 +662,70 @@ hotline 0126 4428 166.</p>
 }
 function phanquyen_menu($ten,$com,$act,$type){
 	
-	global $d;
+	global $d,$_GET;
 	$l_com = $_SESSION['login']['com'];
 	$nhom = $_SESSION['login']['nhom'];
-
 	$d->reset();
 	$sql = "select id from #_com_quyen where id_quyen='".$nhom."' and com='".$com."' and type ='".$type."' and find_in_set('".$act."',act)>0  limit 0,1";
 	$d->query($sql);
 	$com_manager = $d->result_array();
-	
 	if(!empty($com_manager) or $l_com=='admin'){		
 		if($com==$_GET['com'] && $act==$_GET['act'] && $type==$_GET['type']){$add_class = 'class="this"';}
 		if($type=='daduyet'){$a=1;}	
 		if($type=='chuaduyet'){$a=0;}
-		if($type=='vipham'){$a=2;}		
+		if($type=='vipham'){$a=2;}	
 		if($type=='daduyet' or $type=='chuaduyet' or $type=='vipham'){	
-			echo  "<li ".$add_class."><a href='index.php?com=".$com."&act=".$act."&type=".$type."'>".$ten." <i class='".$type."'>". count_hople($a) ."</i></a></li>";
+			echo  "<li ".$add_class."><a href='index.php?com=".$com."&act=".$act."&type=".$type."'>".$ten." <i class='".$type."'>". count_hople($a,$_GET['com']) ."</i></a></li>";
 		}else{
 			echo  "<li ".$add_class."><a href='index.php?com=".$com."&act=".$act."&type=".$type."'>".$ten."</a></li>";
 		}
 	}
 }
-function count_hople($act){
+function phanquyen_menu2($ten,$com,$act,$type,$loai){
+	
+	global $d,$_GET;
+	$l_com = $_SESSION['login']['com'];
+	$nhom = $_SESSION['login']['nhom'];
+	$d->reset();
+	$sql = "select id from #_com_quyen where id_quyen='".$nhom."' and com='".$com."' and type ='".$type."' and find_in_set('".$act."',act)>0  limit 0,1";
+	$d->query($sql);
+	$com_manager = $d->result_array();
+	if(!empty($com_manager) or $l_com=='admin'){		
+		if($com==$_GET['com'] && $act==$_GET['act'] && $type==$_GET['type']){$add_class = 'class="this"';}
+		if($type=='daduyet'){$a=1;}	
+		if($type=='chuaduyet'){$a=0;}
+		if($type=='vipham'){$a=2;}	
+		if($type=='daduyet' or $type=='chuaduyet' or $type=='vipham'){	
+			echo  "<li ".$add_class."><a href='index.php?com=".$com."&act=".$act."&type=".$type."'>".$ten." <i class='".$type."'>". count_hople($a,$loai) ."</i></a></li>";
+		}else{
+			echo  "<li ".$add_class."><a href='index.php?com=".$com."&act=".$act."&type=".$type."'>".$ten."</a></li>";
+		}
+	}
+}
+function change_loaitin($str){
+	switch($str)
+	{
+		case 'tinthuong':
+			return 5;
+			break;
+		case 'khuyenmai':
+			return 4;
+			break;
+		case 'tietkiem':
+			return 3;
+			break;
+		case 'linhdong':
+			return 2;
+			break;
+		case 'supper':
+			return 1;
+			break;				
+	}
+}
+function count_hople($act,$com){
 	global $d, $row;
 	$d->reset();
-	$sql = "select count(id) as dem from table_dangtin where kiemduyet=".$act." and trangthailuu=2";
+	$sql = "select count(id) as dem from table_dangtin where kiemduyet=".$act." and trangthailuu=2 and loaitin='".change_loaitin($com)."'";
 	$d->query($sql);
 	$row = $d->fetch_array();
 	return $row['dem'];

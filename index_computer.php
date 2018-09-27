@@ -6,7 +6,8 @@
 	<meta name="viewport" content="width=1210" />
 	<?php include _template."layout/seoweb.php";?>
 	<?php include _template."layout/js_css.php";?>  
-    <?=$company['analytics']?>     
+    <?=$company['analytics']?>  
+		
 </head>
 
 <body <?php include _template."layout/background.php";?> ondragstart="return false;" ondrop="return false;" >

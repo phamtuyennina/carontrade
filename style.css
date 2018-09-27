@@ -193,10 +193,15 @@ div.menu-panel ul {
     padding: 5px 10px;
     list-style-type: none;
     background-color: #f7f7f7;
-    width: 217px;
-	border-right: 1px solid #cdcdcd;
-	border-left: 1px solid #cdcdcd;
-	border-bottom: 1px solid #cdcdcd;
+    width: 192px;
+    border-right: 1px solid #cdcdcd;
+    border-left: 1px solid #cdcdcd;
+    border-bottom: 1px solid #cdcdcd;
+}
+div.in_log .menu-panel.menu-paneluser{width: 100%;right: 0;justify-content: flex-end;}
+div.in_log .menu-panel.menu-paneluser ul{
+  float: right;
+  position: relative;
 }
 div.menu-panel ul li{
 	border-top: 1px solid #e3e3e3;
@@ -291,11 +296,14 @@ div.in_log .menu-panel {
 }
 div.menu-panel .arrow {
 	left: inherit;
-    left: 20px;
+	left: 20px;
+}
+div.in_log .menu-paneluser .arrow{
+  right: 10 !important;
 }
 div.in_log .arrow{
-	left: inherit;
-    right: 20px;	
+	left: inherit !important;
+	right: 20px;
 }
 div.in_log:hover .menu-panel{opacity:1;visibility:visible;}
 div.in_log p {
@@ -2299,7 +2307,7 @@ ul.tools_dangtin {
 ul.tools_dangtin li{
 	display:inline-block;
 	vertical-align:middle;
-	width: calc(100% / 5 - 3px);
+	width: calc(100% / 6 - 3px);
 	text-align:center;
 }
 ul.tools_dangtin li a{
@@ -3850,7 +3858,7 @@ div#lsnh-result .itemss{
 div.baocao_luutin{
   position: absolute;
   top: 50%;
-  right: 15px;
+  right: 11px;
   transform: translateY(-50%);
 }
 div.baocao_luutin span{
@@ -3869,4 +3877,122 @@ div.baocao_luutin .luutin{
 }
 div.baocao_luutin .baocaotin{
   background: #941e1e;
+}
+div.bx_form1 .select_search_nhienlieu .select2-selection__rendered{
+  padding-left: 160px !important;
+}
+div.select_tienich{
+  max-width: 302px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+div.select_tienich span{
+  float: left;
+  width: 190px;
+  padding: 9px 10px;
+  line-height: 1;
+  font-size: 15px;
+}
+div.select_tienich label{
+  float: left;
+  margin-bottom: 0;
+  font-weight: normal;
+  width: 55px;
+  text-align: center;
+  line-height: 1;
+  padding: 10px 0px;
+  background: #aaa;
+  color: #fff;
+  cursor: pointer;
+}
+div.select_tienich input{
+  display: none;
+}
+div.select_tienich input:checked + label{
+  background: #1b75ba;
+}
+p.note_tienich span{color: red;font-weight: bold;}
+div.loaitindang span{
+  
+}
+div.loaitindang select{
+  
+}
+div.loaitindang input{
+  
+}
+div.pad_tint_lc {
+    display: inline-block;
+    vertical-align: top;
+    width: calc(100% / 5 - 4px);
+    padding: 0px 20px;
+    margin-bottom: 20px;
+}
+div.lc_col1 {
+    width: 70%;
+    float: left;
+}
+div.lc_col2 {
+    width: 30%;
+    float: right;
+    text-align: center;
+    border-left: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+div.bx_tinzz_lcv {
+    border: 1px solid #ccc;
+    display: flex;
+    flex-flow: row wrap;
+}
+div.lc_col1 div p{
+  text-align: center;
+  font-family: myFont;
+  padding: 5px 0px;
+  border-bottom: 1px solid #ccc;
+}
+div.lc_col1 div p span{color: red;}
+div.lc_col1 div p:last-child{border: none;}
+div.lc_col1 > p{
+  background: rgba(27,117,186,1);
+  text-align: center;
+  color: #fff;
+  padding: 5px 10px;
+  font-family: myFont;
+  text-transform: capitalize;
+}
+div.tietkiem .lc_col1 > p{
+  background: rgba(181,230,29,1);
+}
+div.linhdong .lc_col1 > p{
+  background: rgba(225,201,14,1);
+}
+div.supper .lc_col1 > p{
+  background: rgba(153,217,234,1);
+}
+div.khuyenmai .lc_col1 > p{
+  background: rgba(255,0,0,1);
+}
+div.show_luachon {
+    margin: 0px -20px;
+}
+div.show_luachon label{
+  display: block;
+  font-weight: normal;
+  margin-bottom: 0;
+  font-family: Open sans;
+  font-weight: 600;
+}
+div.show_luachon input[type="radio"] {
+  -webkit-appearance: checkbox; /* Chrome, Safari, Opera */
+  -moz-appearance: checkbox;    /* Firefox */
+  -ms-appearance: checkbox;     /* not currently supported */
+}
+div.tab_tintuc{
+  display: none;
+}
+a.dem_click_banner{
+  display: block;
 }

@@ -21,6 +21,7 @@ IncludeJavaScript('js/plugins/ui/jquery.collapsible.min.js');
 IncludeJavaScript('js/plugins/ui/jquery.sourcerer.js');
 IncludeJavaScript('js/plugins/ui/jquery.timeentry.min.js');
 IncludeJavaScript('js/plugins/forms/jquery.dualListBox.js');
+IncludeJavaScript('js/MonthPicker.js');
 IncludeJavaScript('js/custom.js');
 IncludeJavaScript('js/js_admin.js');
 IncludeJavaScript('js/function.js');

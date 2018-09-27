@@ -38,6 +38,12 @@
                     <p>Đăng tải hình ảnh</p>
                 </a>
             </li>
+            <li>
+            	<a href="<?=$com?>/tien-ich-nguoi-ban" class="<?php if($_GET['step']=='tien-ich-nguoi-ban'){echo 'act';} ?>">
+                	<img src="images/dt4.png" alt="Đăng tin - Tiện ích người bán"  /><div class="clear"></div>
+                    <p>Tiện ích người bán</p>
+                </a>
+            </li>
 
             <li>
             	<a href="<?=$com?>/xac-nhan" class="<?php if($_GET['step']=='xac-nhan'){echo 'act';} ?>">

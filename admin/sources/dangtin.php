@@ -5,6 +5,7 @@
 	$urlcu = "";
 	$urlcu .= (isset($_REQUEST['p'])) ? "&p=".addslashes($_REQUEST['p']) : "";
 	$urlcu .= (isset($_REQUEST['type'])) ? "&type=".addslashes($_REQUEST['type']) : "";
+	$urlcu .= (isset($_REQUEST['loaitin'])) ? "&loaitin=".addslashes($_REQUEST['loaitin']) : "";
 	//$urlcu .= (isset($_REQUEST['id_user'])) ? "&id_user=".addslashes($_REQUEST['id_user']) : "";
 
 //===========================================================
@@ -45,7 +46,7 @@ function fns_Rand_digit($min,$max,$num)
 //===========================================================
 function get_items(){
 	global $d, $items, $url_link,$totalRows , $pageSize, $offset,$paging,$urlcu;
-	$where =" and trangthailuu=2";
+	$where =" and trangthailuu=2 and loaitin='".change_loaitin($_GET['com'])."'";
 	if($_REQUEST['type']=='daduyet')
 	{
 		$where.=" and kiemduyet=1";
@@ -87,7 +88,7 @@ function get_items(){
 	$sql = "select * from #_dangtin where id<>0 $where limit $bg,$pageSize";		
 	$d->query($sql);
 	$items = $d->result_array();
-	
+
 	$url_link="index.php?com=dangtin&act=man".$urlcu;
 
 }

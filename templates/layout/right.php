@@ -76,7 +76,7 @@
 	<div class="slick_sl5">
     	<?php foreach($row_qc1 as $v){ ?>
         <div>
-        	<p><a href="<?=$v['link']?>"><img src="thumb/350x340x1x90/<?=_upload_hinhanh_l.$v['photo']?>" alt="<?=$v['ten']?>" /></a></p>
+        	<p><a class="dem_click_banner" data-id="<?=$v['id']?>" href="<?=$v['link']?>"><img src="thumb/350x340x1x90/<?=_upload_hinhanh_l.$v['photo']?>" alt="<?=$v['ten']?>" /></a></p>
         </div>
         <?php }?>
     </div>

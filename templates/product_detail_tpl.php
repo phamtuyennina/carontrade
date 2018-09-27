@@ -13,7 +13,7 @@
         	<div class="ten_dulieu">
                  <p><a title="<?=$v['ten']?>" href="javascript:void(0)"><?=$row_detail['ten']?></a>
 								 		<div class="baocao_luutin">
-								 			<span class="luutin <?=kiemtratrangthailuu($row_detail['id'],$_SESSION['user_w']['id'])?>" data-idtin="<?=$row_detail['id']?>" data-user="<?=$_SESSION['user_w']['id']?>">Lưu <i class="fa fa-star-o" aria-hidden="true"></i></span>
+								 			<span class="luutin <?=(!empty($_SESSION['user_w']['id']))?kiemtratrangthailuu($row_detail['id'],$_SESSION['user_w']['id']):''?>" data-idtin="<?=$row_detail['id']?>" data-user="<?=$_SESSION['user_w']['id']?>">Lưu <i class="fa fa-star-o" aria-hidden="true"></i></span>
 											<span class="baocaotin" data-idtin="<?=$row_detail['id']?>" data-user="<?=$_SESSION['user_w']['id']?>">Tin vi phạm</span>
 								 		</div>
 								 </p>
@@ -169,7 +169,7 @@
                         <?php foreach($quangcao3 as $v){ ?>
                         <div>
                             <div class="pad_sl3">
-                                <p><a href="<?=$v['link']?>"><img src="thumb/385x130x1x90/<?=_upload_hinhanh_l.$v['photo']?>" alt="<?=$v['ten']?>" /></a></p>
+                                <p><a class="dem_click_banner" data-id="<?=$v['id']?>" href="<?=$v['link']?>"><img src="thumb/385x130x1x90/<?=_upload_hinhanh_l.$v['photo']?>" alt="<?=$v['ten']?>" /></a></p>
                             </div>
                         </div>
                         <?php }?>

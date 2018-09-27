@@ -1,13 +1,20 @@
 <div class="logo"> <a href="#" target="_blank" onclick="return false;"> <img src="images/logo.png"  alt="" /> </a></div>
 <div class="sidebarSep mt0"></div>
-<!-- Left navigation -->
+<!-- Left navigation  -->
 <ul id="menu" class="nav">
   <li class="dash" id="menu1"><a class=" active" title="" href="index.php"><span>Trang chủ</span></a></li>
-
-  <li class="categories_li search_li <?php if($_GET['com']=='quanly') echo ' activemenu' ?>" id="menu_tk"><a href="" title="" class="exp"><span>Thuộc tính đăng tin</span><strong></strong></a>
+  
+  <li class="categories_li money_li <?php if($_GET['com']=='quanly' && ($_GET['type']=='tin-thuong' or $_GET['type']=='tin-khuyen-mai' or $_GET['type']=='tin-tiet-kiem' or $_GET['type']=='tin-linh-dong' or $_GET['type']=='tin-supper')) echo ' activemenu' ?>" id="menu_tk1"><a href="" title="" class="exp"><span>Quản lý gói tin</span><strong></strong></a>
    <ul class="sub">
-        <?php phanquyen_menu('Gói đăng tin','quanly','man','goitin'); ?>
-   		  <?php //phanquyen_menu('Tình trạng xe','quanly','man','tintrangxe'); ?>
+        <?php phanquyen_menu('Gói tin thường','quanly','man','tin-thuong'); ?>
+        <?php phanquyen_menu('Gói tin khuyến mãi','quanly','man','tin-khuyen-mai'); ?>
+        <?php phanquyen_menu('Gói tin tiết kiệm','quanly','man','tin-tiet-kiem'); ?>
+        <?php phanquyen_menu('Gói tin linh động','quanly','man','tin-linh-dong'); ?>
+        <?php phanquyen_menu('Gói tin supper','quanly','man','tin-supper'); ?>
+    </ul>
+  </li>
+  <li class="categories_li search_li <?php if($_GET['com']=='quanly' && ($_GET['type']!='tin-thuong' && $_GET['type']!='tin-khuyen-mai' && $_GET['type']!='tin-tiet-kiem' && $_GET['type']!='tin-linh-dong' && $_GET['type']!='tin-supper')) echo ' activemenu' ?>" id="menu_tk"><a href="" title="" class="exp"><span>Thuộc tính đăng tin</span><strong></strong></a>
+   <ul class="sub">
         <?php phanquyen_menu('Năm sản xuất','quanly','man','namsanxuat'); ?>
         <?php phanquyen_menu('Màu sắc','quanly','man','mausac'); ?>
         <?php phanquyen_menu('Giá xe','quanly','man','giaxe'); ?>
@@ -22,18 +29,62 @@
         <?php phanquyen_menu('Mức độ tiêu thụ','quanly','man','mucdotieuthu'); ?>
     </ul>
   </li>
- 
-  <li class="categories_li product_li <?php if(($_GET['com']=='product' && $_GET['type']!='dinhgiaxe') || $_GET['com']=='dangtin' || $_GET['com']=='excel') echo ' activemenu' ?>" id="menu2"><a href="" title="" class="exp"><span>Quản lý đăng tin</span><strong></strong></a>
+  <li class="categories_li product_li <?php if(($_GET['com']=='product' && $_GET['type']!='dinhgiaxe') || $_GET['com']=='excel') echo ' activemenu' ?>" id="menu2">
+    <a href="" title="" class="exp"><span>Quản lý hãng xe</span><strong></strong></a>
    <ul class="sub">
    		<?php phanquyen_menu('Hãng sản xuất','product','man_danhmuc','loaixe'); ?>
    		<?php phanquyen_menu('Kiểu dáng xe','product','man_danhmuc','kieu-dang'); ?>
         <?php phanquyen_menu('Quản lý mẫu xe','product','man_danhmuc','mau-xe'); ?>
-        
-        <?php phanquyen_menu('Quản lý đã kiểm duyệt','dangtin','man','daduyet'); ?>
-        <?php phanquyen_menu('Quản lý đợi kiểm duyệt','dangtin','man','chuaduyet'); ?>
-        <?php phanquyen_menu('Quản lý tin vi phạm','dangtin','man','vipham'); ?>
     </ul>
   </li>
+  
+  <li class="categories_li product_li <?php if($_GET['com']=='tinthuong') echo ' activemenu' ?>" id="menu_thuong">
+    <a href="" title="" class="exp"><span>Quản lý tin thường</span><strong></strong></a>
+   <ul class="sub">
+        <?php phanquyen_menu2('Tin thường đã duyệt','tinthuong','man','daduyet','tinthuong'); ?>
+        <?php phanquyen_menu2('Tin thường chưa duyệt','tinthuong','man','chuaduyet','tinthuong'); ?>
+        <?php phanquyen_menu2('Tin thường vi phạm','tinthuong','man','vipham','tinthuong'); ?>
+        <?php phanquyen_menu2('Tin thường hết hạn','tinthuong','man','hethan','tinthuong'); ?>
+    </ul>
+  </li>
+  
+  <li class="categories_li product_li <?php if($_GET['com']=='khuyenmai') echo ' activemenu' ?>" id="menu_khuyenmai">
+    <a href="" title="" class="exp"><span>Quản lý tin khuyến mãi</span><strong></strong></a>
+   <ul class="sub">
+        <?php phanquyen_menu2('Tin khuyến mãi đã duyệt','khuyenmai','man','daduyet','khuyenmai'); ?>
+        <?php phanquyen_menu2('Tin khuyến mãi chưa duyệt','khuyenmai','man','chuaduyet','khuyenmai'); ?>
+        <?php phanquyen_menu2('Tin khuyến mãi vi phạm','khuyenmai','man','vipham','khuyenmai'); ?>
+        <?php phanquyen_menu2('Tin khuyến mãi hết hạn','khuyenmai','man','hethan','khuyenmai'); ?>
+    </ul>
+  </li>
+  <li class="categories_li product_li <?php if($_GET['com']=='tietkiem') echo ' activemenu' ?>" id="menu_tietkiem">
+    <a href="" title="" class="exp"><span>Quản lý tin tiết kiệm</span><strong></strong></a>
+   <ul class="sub">
+        <?php phanquyen_menu2('Tin tiết kiệm đã duyệt','tietkiem','man','daduyet','tietkiem'); ?>
+        <?php phanquyen_menu2('Tin tiết kiệm chưa duyệt','tietkiem','man','chuaduyet','tietkiem'); ?>
+        <?php phanquyen_menu2('Tin tiết kiệm vi phạm','tietkiem','man','vipham','tietkiem'); ?>
+        <?php phanquyen_menu2('Tin tiết kiệm hết hạn','tietkiem','man','hethan','tietkiem'); ?>
+    </ul>
+  </li>
+  <li class="categories_li product_li <?php if($_GET['com']=='linhdong') echo ' activemenu' ?>" id="menu_linhdong">
+    <a href="" title="" class="exp"><span>Quản lý tin linh động</span><strong></strong></a>
+   <ul class="sub">
+        <?php phanquyen_menu2('Tin linh động đã duyệt','linhdong','man','daduyet','linhdong'); ?>
+        <?php phanquyen_menu2('Tin linh động chưa duyệt','linhdong','man','chuaduyet','linhdong'); ?>
+        <?php phanquyen_menu2('Tin linh động vi phạm','linhdong','man','vipham','linhdong'); ?>
+        <?php phanquyen_menu2('Tin linh động hết hạn','linhdong','man','hethan','linhdong'); ?>
+    </ul>
+  </li>
+  <li class="categories_li product_li <?php if($_GET['com']=='supper') echo ' activemenu' ?>" id="menu_supper">
+    <a href="" title="" class="exp"><span>Quản lý tin supper</span><strong></strong></a>
+   <ul class="sub">
+        <?php phanquyen_menu2('Tin supper đã duyệt','supper','man','daduyet','supper'); ?>
+        <?php phanquyen_menu2('Tin supper chưa duyệt','supper','man','chuaduyet','supper'); ?>
+        <?php phanquyen_menu2('Tin supper vi phạm','supper','man','vipham','supper'); ?>
+        <?php phanquyen_menu2('Tin supper hết hạn','supper','man','hethan','supper'); ?>
+    </ul>
+  </li>
+
   <li class="categories_li product_li <?php if(($_GET['com']=='product' && $_GET['type']=='dinhgiaxe') or($_GET['type']=='dinhgiaxe' or $_GET['type']=='motacapdo')) echo ' activemenu' ?>" id="menu21"><a href="" title="" class="exp"><span>Quản lý định giá xe</span><strong></strong></a>
    <ul class="sub">
    		<?php phanquyen_menu('Quản lý nhóm','product','man_danhmuc','dinhgiaxe'); ?>

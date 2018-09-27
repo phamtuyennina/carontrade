@@ -385,12 +385,12 @@
 	
 	if($source=='index'){$vcom='';}else{$vcom=$com;}
 	$d->reset();
-	$sql = "select photo$lang as photo,link,ten$lang as ten from #_slider where type='slider4' and giaodien='".$vcom."' and hienthi=1";
+	$sql = "select photo$lang as photo,link,ten$lang as ten,id from #_slider where type='slider4' and giaodien='".$vcom."' and hienthi=1";
 	$d->query($sql);
 	$row_qc = $d->result_array();
 	
 	$d->reset();
-	$sql = "select photo$lang as photo,link,ten$lang as ten from #_slider where type='slider5' and giaodien='".$vcom."' and hienthi=1 ";
+	$sql = "select photo$lang as photo,link,ten$lang as ten,id from #_slider where type='slider5' and giaodien='".$vcom."' and hienthi=1 ";
 	$d->query($sql);
 	$row_qc1 = $d->result_array();
 	

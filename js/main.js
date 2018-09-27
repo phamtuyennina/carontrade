@@ -13,7 +13,43 @@ function onclick_ajax(){
 	if(isEmpty($('#frm1 #noidung_lienhe').val(), nhapnoidung)){$('#frm1 #noidung_lienhe').focus();return false;}
 	document.frm1.submit();
 }
+function xoatin_tinluu(id){
+	hoi= confirm("Bạn có chắc chắn muốn xóa?");
+	if(hoi==false){return false;}
+	HoldOn.open({
+		theme:'sk-cube-grid',
+	});
+	$.ajax({
+		url:'ajax/xoatinluu.html',
+		type:"post",
+		data:{id:id},
+		success: function(data){
+			swal({
+				  title: 'Thành công',
+				  text: 'Tin đã được xóa thành công.',
+				  icon: 'success',
+				  button: "Ok!",
+				}).then((willDelete) => {
+					location.reload();
+			});
+		}
+	})
+}
 $(document).ready(function() {
+	$('a.dem_click_banner').click(function(event) {
+		var link=$(this).attr('href');
+		var id=$(this).attr('data-id');
+		if(link==''){return false;}
+		$.ajax({
+			url:'ajax/countslider.html',
+			data:{id:id},
+			type:'post',
+			success:function(data){
+				//window.location.href=link;
+			}
+		})
+		return false;
+	});
 	$('.luutin').click(function(event) {
 			var idtin=$(this).data('idtin');
 			var user=$(this).data('user');
@@ -21,6 +57,7 @@ $(document).ready(function() {
 				alert('Bạn đã lưu tin này trước đó.');
 				return false;
 			}
+			
 			if(user==''){
 				swal({
 				  title: "Lưu tin",
@@ -35,8 +72,11 @@ $(document).ready(function() {
 				.then((willDelete) => {
 				  if (willDelete) {
 				    window.location.href = 'dang-nhap.html';
-				  }else{} 
+				  }else{
+						return false;
+					} 
 				});
+				return false;
 			}
 			$.ajax({
 				url:'ajax/luutin.html',
@@ -92,6 +132,40 @@ $(document).ready(function() {
 			}
 		})
 	});
+	$('.chiphilb').click(function(event) {
+		  $(".body-lanbanh").load("ajax/chiphimuaxe.php");
+  		$('#myModal12').modal('show');
+  });
+	$('.vaynganhang').click(function(event) {
+		  $(".body-nganhang").load("ajax/vaynganhang.php");
+  		$('#myModal123').modal('show');
+  });
+	$('.tienich_laithu').click(function(event) {
+		$('#myModal_laithu').modal('show');
+	});
+	$('.tienich_tragop').click(function(event) {
+		$('#myModal_tragop').modal('show');
+	});
+	$('.tienich_tragop').click(function(event) {
+		$('#myModal_tragop').modal('show');
+	});
+	$('.baocaotin').click(function(event) {
+		var id=$(this).data('idtin');
+		hoi= confirm("Bạn có chắc chắn muốn báo cáo vi phạm cho tin này?");
+		if(hoi==false){return false;}
+		$.ajax({
+			url:'ajax/baocaovipham.html',
+			type:'post',
+			data:{id:id},
+			success:function(data){
+				if(data==0){
+						swal("Báo cáo tin vi phạm", "Báo cáo thành công. Chúng tôi sẽ kiểm tra trong thời gian sớm nhất !", "success");
+				}else{
+					  swal("Báo cáo tin vi phạm", "Hệ thống bị lỗi. Vui lòng thử lại sau !", "error");
+				}
+			}
+		})
+	});
 });
 
 $(document).ready(function(){
@@ -106,25 +180,8 @@ $(document).ready(function(){
 		$(this).addClass('act');
 		$(this).next().stop().slideDown();
 	});
-  $('.chiphilb').click(function(event) {
-		  $(".body-lanbanh").load("ajax/chiphimuaxe.php");
-  		$('#myModal12').modal('show');
-  });
-	$('.vaynganhang').click(function(event) {
-		  $(".body-nganhang").load("ajax/vaynganhang.php");
-  		$('#myModal123').modal('show');
-  });
-	$('.tienich_laithu').click(function(event) {
-		$('#myModal_laithu').modal('show');
-	})
-	$('.tienich_tragop').click(function(event) {
-		$('#myModal_tragop').modal('show');
-	})
-	$('.tienich_tragop').click(function(event) {
-		$('#myModal_tragop').modal('show');
-	})
+  
 	$('.btn_lienhe').click(function(e) {
-
     if(isEmpty($('#lienhemua #ten').val(), nhaphoten )){$('#lienhemua #ten').focus();return false;}
 		if(isEmpty($('#lienhemua #email').val(), emailkhonghople)){$('#lienhemua #email').focus();return false;}
 		if(isEmail($('#lienhemua #email').val(), emailkhonghople)){$('#lienhemua #email').focus();return false;}
@@ -135,12 +192,11 @@ $(document).ready(function(){
 		$('#lienhemua').submit();
     });
 	$('.call_u a.p_cal1').click(function(e) {
-        var str=$(this).data('call');
+    var str=$(this).data('call');
 		$('.call_u a.p_cal1').html(str);
-		setTimeout(function(){
-			$('.call_u a.p_cal1').attr('href','tel:'+str);
-		},1000)
-
+			setTimeout(function(){
+				$('.call_u a.p_cal1').attr('href','tel:'+str);
+			},1000);
     });
 	$('.slick2').photobox('a',{ time:0 });
 	$('.slick2').slick({
@@ -379,6 +435,13 @@ $(document).ready(function(){
 /*-----------------------*/
 
 function initLink(){
+	$('#loaitin').change(function(event) {
+		if($(this).val()==''){return false;}
+		var stt=$(this).val();
+		$('.tab_tinthuong input[type="radio"]').prop( "checked", false );
+		$('.tab_tinthuong').hide();
+		$('.tab_tinthuong:eq('+(stt-1)+')').show();
+	});
 	$('.tools_dangtin li a').click(function(e) {
 		if($(this).hasClass('act')){return false;}
 		HoldOn.open({
@@ -460,6 +523,7 @@ function xoatin_chitiet(id){
 		}
 	})
 }
+
 function suatin_chitiet(id,url){
 	$.ajax({
 		url:'ajax/taotinfix.html',

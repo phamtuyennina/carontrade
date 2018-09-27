@@ -168,9 +168,15 @@ function delete_photo(){
 		if($d->num_rows()==0) transfer("Dữ liệu không có thực", "index.php?com=slider&act=man_photo".$urlcu);
 		$row = $d->fetch_array();
 		delete_file(_upload_hinhanh.$row['photo']);
-		if($d->delete())
+		if($d->delete()){
+			$d->reset();
+			$d->query("delete from table_counter_detail where id_hinhanh='".$id."'");
+			$d->reset();
+			$d->query("delete from table_counter_sum where id_hinhanh='".$id."'");
+			$d->reset();
+			$d->query("delete from table_counter_website where id_hinhanh='".$id."'");
 			redirect("index.php?com=slider&act=man_photo".$urlcu);
-		else
+		}else
 			transfer("Xóa dữ liệu bị lỗi", "index.php?com=slider&act=man_photo".$urlcu);
 	}elseif (isset($_GET['listid'])==true){
 		$listid = explode(",",$_GET['listid']); 
@@ -184,8 +190,15 @@ function delete_photo(){
 			while($row = $d->fetch_array()){
 				delete_file(_upload_hinhanh.$row['photo']);
 			}
+			$d->reset();
 			$sql = "delete from #_slider where id='".$id."'";
 			$d->query($sql);
+			$d->reset();
+			$d->query("delete from table_counter_detail where id_hinhanh='".$id."'");
+			$d->reset();
+			$d->query("delete from table_counter_sum where id_hinhanh='".$id."'");
+			$d->reset();
+			$d->query("delete from table_counter_website where id_hinhanh='".$id."'");
 		}
 			
 		} redirect("index.php?com=slider&act=man_photo".$urlcu);} else transfer("Không nhận được dữ liệu", "index.php?com=slider&act=man_photo".$urlcu);

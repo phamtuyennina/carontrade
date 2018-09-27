@@ -160,13 +160,8 @@
                     </div>
                     <div class="tk30">
                         <div class="select_search">
-                            <span class="pos">Mức độ tiêu thụ (L/100km):</span>
-                            <select id="mucdotieuthu" name="mucdotieuthu" class="js-example-responsive1" data-placeholder="">
-                                <option></option>
-                                <?php foreach($mucdotieuthu as $v){ ?>
-                                <option <?php if($_SESSION['dangtin']['mucdotieuthu']==$v['tenkhongdau']){echo 'selected';} ?> value="<?=$v['tenkhongdau']?>"><?=$v['ten']?></option>
-                                <?php }?>
-                            </select>
+                            <span class="pos" style="letter-spacing: -1px;">Mức độ tiêu thụ (L/100km):</span>
+														<input type="text" name="mucdotieuthu" autocomplete="off" value="<?=!empty(@$_SESSION['dangtin']['mucdotieuthu'])?@$_SESSION['dangtin']['mucdotieuthu']:0?>" placeholder="Chỉ cần nhập số"  class="conso input_dangtin" style="padding-left: 180px;" />
                         </div>
                     </div>
                 </div>
@@ -185,14 +180,14 @@
                     <div class="tk30">
                         <div class="select_search">
                             <span class="pos">Số Km đã đi:</span>
-                            <input value="<?=@$_SESSION['dangtin']['sokm']?>" autocomplete="off" type="text" name="sokm" placeholder="Chỉ cần nhập số"  class="conso input_dangtin" />
+                            <input value="<?=!empty(@$_SESSION['dangtin']['sokm'])?@$_SESSION['dangtin']['sokm']:0?>" autocomplete="off" type="text" name="sokm" placeholder="Chỉ cần nhập số"   class="conso input_dangtin" />
                             
                         </div>
                     </div>
                     <div class="tk30">
                         <div class="select_search">
                             <span class="pos">Giá tiền:</span>
-                            <input type="text" name="giatien" autocomplete="off" value="<?=@$_SESSION['dangtin']['giatien']?>" placeholder="Chỉ cần nhập số"  class="conso input_dangtin" />
+                            <input type="text" name="giatien" autocomplete="off" value="<?=!empty(@$_SESSION['dangtin']['giatien'])?@$_SESSION['dangtin']['giatien']:0?>" placeholder="Chỉ cần nhập số"  class="conso input_dangtin" />
                             
                         </div>
                     </div>

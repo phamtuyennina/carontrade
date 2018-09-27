@@ -73,6 +73,7 @@
         <?php if($_GET['type']=='slider4' or $_GET['type']=='slider5'){ ?>
         <td width="200">Giao diện</td>
         <?php }?>
+				<td width="200" class="<?php if($_GET['type']=='slider' or $_GET['type']=='chungnhan' or $_GET['type']=='kieudang'){echo 'none';} ?>">Thống kê</td>
         <td class="tb_data_small">Ẩn/Hiện</td>
         <td width="200">Thao tác</td>
       </tr>
@@ -108,6 +109,9 @@
          </td>
     
        <?php }?> 
+			 <td align="center" class="<?php if($_GET['type']=='slider' or $_GET['type']=='chungnhan' or $_GET['type']=='kieudang'){echo 'none';} ?>">
+					<a target="_blank" href="index.php?com=statistics&act=man&id_hinhanh=<?=$items[$i]['id']?>" >Xem</a> 
+			 </td>   
         <td align="center">
            <a data-val2="table_<?=$_GET['com']?>" rel="<?=$items[$i]['hienthi']?>" data-val3="hienthi" class="diamondToggle <?=($items[$i]['hienthi']==1)?"diamondToggleOff":""?>" data-val0="<?=$items[$i]['id']?>" ></a> 
         </td>       
